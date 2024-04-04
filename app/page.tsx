@@ -4,7 +4,8 @@ import CarMock from "@/components/CarMock/CarMock";
 import MultimediaMock from "@/components/MultimediaMock/MultimediaMock";
 import { useState } from "react";
 import SimulationDialog from "@/components/SimulationDialog/SimulationDialog";
-
+import logo from "@/public/logo_horizontal.svg"
+import Image from "next/image";
 export default function Home() {
 
 
@@ -26,9 +27,9 @@ export default function Home() {
 
   return (
     <main className="overflow-hidden">
-      <div className="absolute top-4 z-20 w-screen text-center text-xl">
-      Devolt logo
-      </div>
+      <div className="absolute top-4 z-20 mx-auto w-screen flex justify-center text-xl">
+        <Image src={logo} alt="logo" width={150}/>
+      </div>  
       <SimulationDialog
         simulationState={simulationState}
         setSimulationState={setSimulationState}
