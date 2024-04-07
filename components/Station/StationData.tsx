@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Station from "../../types/station";
 import makePercentage from "../../utils/makePercentage";
+import { CircleCheckBig, CircleGauge, Coins, LandPlot, MapPin } from "lucide-react";
 
 interface StationDataProps {
   selectedStation: Station | null;
@@ -12,43 +13,24 @@ export const StationData = ({ selectedStation }: StationDataProps) => {
     <>
       <p className="text-3xl text-[#37e231] font-bold">Selected station</p>
       <div className="flex gap-2 items-center my-4">
-        <Image
-          src="./pin.svg"
-          alt="Station location pin"
-          width={40}
-          height={40}
-        />
+        <MapPin width={30} height={30} />
         <p className="font-bold">Address</p>
         <span>{selectedStation?.address || "-"}</span>
       </div>
       <div className="flex gap-2 items-center my-4">
-        <Image
-          src="./charger.svg"
-          alt="Charger compatibility icon"
-          width={40}
-          height={40}
-        />
+      <CircleCheckBig  width={30} height={30} />
         <b>Compatibility</b>
         <span>BYD, EC20 and Volvo Plugs</span>
       </div>
       <div className="flex gap-2 items-center my-4">
-        <Image
-          src="./wallet.svg"
-          alt="Price per Kw icon"
-          width={40}
-          height={40}
-        />
-        <b>Price per Kw (Voltz)</b>
-        <span>{selectedStation?.meanPrice || "---"}</span>
+      <Coins  width={30} height={30} />
+        <b>Price per Kw ($V)</b>
+        <span>{selectedStation?.meanPrice || "-"}</span>
       </div>
       <div className="flex gap-2 items-center my-4">
-        <Image
-          src="./capacity.svg"
-          alt="Capacity icon"
-          width={40}
-          height={40}
-        />
-        <p className="font-bold">Capacity</p>
+      <CircleGauge  width={30} height={30} />
+
+        <p className="font-bold">Charge Speed:</p>
         <span>
           {selectedStation?.batteryLevel !== undefined &&
           selectedStation?.maxCapacity !== undefined

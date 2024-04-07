@@ -59,20 +59,22 @@ const SelectPlug = ({
   };
 
   return (
-    <div className="flex justify-center items-center h-full">
-      <div className="bg-zinc-900 h-[800px] w-[50%] rounded-3xl p-8 relative">
-        <h1 className="ml-4 font-bold text-[30px] text-zinc-200 my-6 mt-0">
-          #3 Select your preferred charging spot
-        </h1>
-        <h2 className="m-6">
-          The nearest charging station to your current location is automatically
-          selected, but you can choose any DeVolt station you prefer.
-        </h2>
+    <>
+    <div className="relative h-full">
 
+      <h1 className="ml-4 font-bold text-[30px] text-zinc-200 my-6 mt-0">
+        Select your preferred charging spot
+      </h1>
+      <h2 className="m-6">
+        The nearest charging station to your current location is automatically
+        selected, but you can choose any DeVolt station you prefer.
+      </h2>
+
+      <div className="flex flex-wrap justify-around gap-6">
         {spots.map((spot) => (
           <div
-            className="bg-zinc-950 rounded-lg h-24 w-full my-6"
-            key={spot.id}
+          className="bg-zinc-800 rounded-lg h-24  w-[45%]"
+          key={spot.id}
           >
             <div className="grid grid-cols-3 gap-4 h-full">
               <div className="flex justify-center items-center">
@@ -90,6 +92,7 @@ const SelectPlug = ({
             </div>
           </div>
         ))}
+        </div>
 
         <div className="absolute bottom-0 left-0 right-0">
           <div className="flex justify-between m-4">
@@ -105,45 +108,45 @@ const SelectPlug = ({
             </button>
           </div>
         </div>
-      </div>
 
-      <Dialog open={openPopUp}>
-        <DialogContent className="bg-[#1a1a1a] border-none shadow-lg">
-          <DialogTitle className="text-3xl text-white pb-2">
-            Review your purchase:
-          </DialogTitle>
-          <DialogDescription>
-            <p className="text-xl font-semibold">
-              Selected Station: {selectedStation?.id}
-            </p>
-            <p className="text-xl font-semibold">
-              Address: {selectedStation?.address}
-            </p>
-            <p className="pt-6 text-xl font-semibold">
-              Price for each Kw: {averagePrice} Voltz/Kw
-            </p>
-            <p className="pt-6 text-xl font-semibold">
-              Amount of Kw to be charged: {toBeCharged}
-            </p>
-            <p className="pt-6 text-xl font-semibold">
-              Total to be paid: V${chargeCost}
-            </p>
-          </DialogDescription>
-          <button
-            onClick={() => setOpenPopUp(false)}
-            className="bg-primary text-black font-semibold px-4 py-2 rounded-lg"
-          >
-            Place Bid and Unlock Charger
-          </button>
-          <button
-            onClick={() => setOpenPopUp(false)}
-            className="bg-[#444] text-white px-4 py-2 rounded-lg"
-          >
-            Go back
-          </button>
-        </DialogContent>
-      </Dialog>
-    </div>
+        <Dialog open={openPopUp}>
+          <DialogContent className="bg-[#1a1a1a] border-none shadow-lg">
+            <DialogTitle className="text-3xl text-white pb-2">
+              Review your purchase:
+            </DialogTitle>
+            <DialogDescription>
+              <p className="text-xl font-semibold">
+                Selected Station: {selectedStation?.id}
+              </p>
+              <p className="text-xl font-semibold">
+                Address: {selectedStation?.address}
+              </p>
+              <p className="pt-6 text-xl font-semibold">
+                Price for each Kw: {averagePrice} Voltz/Kw
+              </p>
+              <p className="pt-6 text-xl font-semibold">
+                Amount of Kw to be charged: {toBeCharged}
+              </p>
+              <p className="pt-6 text-xl font-semibold">
+                Total to be paid: V${chargeCost}
+              </p>
+            </DialogDescription>
+            <button
+              onClick={() => setOpenPopUp(false)}
+              className="bg-primary text-black font-semibold px-4 py-2 rounded-lg"
+            >
+              Place Bid and Unlock Charger
+            </button>
+            <button
+              onClick={() => setOpenPopUp(false)}
+              className="bg-[#444] text-white px-4 py-2 rounded-lg"
+            >
+              Go back
+            </button>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </>
   );
 };
 

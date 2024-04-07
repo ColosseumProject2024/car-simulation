@@ -64,11 +64,10 @@ const mockStations: Station[] = [
 
 const Buy = () => {
   const Map = useMemo(
-    () =>
-      dynamic(() => import("@/components/Map/Map"), {
-        loading: () => <p>map is loading</p>,
-        ssr: false,
-      }),
+    () => dynamic(() => import("@/components/Map/Map"), {
+      loading: () => <p>map is loading</p>,
+      ssr: false,
+    }),
     []
   );
 
@@ -86,38 +85,29 @@ const Buy = () => {
     setShowBuyEnergyPage(true);
   };
 
-  const price = selectedStation?.meanPrice || 0;
-
   if (showBuyEnergyPage) {
     return (
       <BuyEnergy
-        averagePrice={price}
+        averagePrice={selectedStation?.meanPrice || 0}
         selectedStation={selectedStation}
-        setSelectedStation={setSelectedStation}
         value={value}
+        setSelectedStation={setSelectedStation}
         setValue={setValue}
         onSubmit={() => setOpenPopUp(true)}
       />
     );
   }
 
-  function placeBid() {
-    throw new Error("Function not implemented.");
-  }
-
   return (
     <LocationProvider>
-      <div className="grid grid-cols-3 h-full">
-        <div className="col-span-2 text-center pt-4 px-4">
+      <div className={`grid h-full ${selectedStation ? 'grid-cols-3' : 'grid-cols-1'}`}>
+        <div className={`${selectedStation ? 'col-span-2' : 'col-span-1'} text-center pt-4 px-4`}>
           <h1 className="font-bold text-[30px] text-zinc-200">
             Select your DeVolt Station
           </h1>
           <h2 className="m-6">
-            The nearest charging station to your current location is
-            automatically selected, but you can choose any DeVolt station you
-            prefer.
+            The nearest charging station to your current location is automatically selected, but you can choose any DeVolt station you prefer.
           </h2>
-
           <MapSectionBuypage
             roundedTopCorners={true}
             roundedBottomCorners={true}
@@ -127,63 +117,24 @@ const Buy = () => {
             setSelectedStation={setSelectedStation}
           />
         </div>
-        <div className="bg-neutral-800 rounded-lg p-4">
-          <StationData selectedStation={selectedStation} />
-          <div>
-                <button>
-                  <Image src={arrowReverse} alt="" />
-                </button>
-                <button
-                  onClick={handleNextStep}
-                  className="bg-[#3AFF4E] h-10 w-32 flex items-center justify-center rounded-md"
-                >
-                  <h1 className="text-black mr-2">Next Step</h1>
-                  <Image src={arrow} alt="" />
-                </button>
+        {selectedStation && (
+          <div className="bg-neutral-800 rounded-lg p-4">
+            <StationData selectedStation={selectedStation} />
+            <div className="relative bottom-0 left-0 right-0 p-4 flex justify-between">
+              <button>
+                <Image src={arrowReverse} alt="" />
+              </button>
+              <button
+                onClick={handleNextStep}
+                className="bg-[#3AFF4E] h-10 w-32 flex items-center justify-center rounded-md"
+              >
+                <h1 className="text-black mr-2">Next Step</h1>
+                <Image src={arrow} alt="" />
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
-
-            <Dialog open={openPopUp}>
-              <DialogContent className="bg-[#1a1a1a] border-none shadow-lg">
-                <DialogTitle className="text-3xl text-white pb-2">
-                  Review your purchase:
-                </DialogTitle>
-                <DialogDescription>
-                  <p className="text-xl font-semibold">
-                    Selected Station: {selectedStation?.id}
-                  </p>
-                  <p className="text-xl font-semibold">
-                    Address: {selectedStation?.address}
-                  </p>
-                  <p className="pt-6 text-xl font-semibold">
-                    Price for each Kw: {selectedStation?.meanPrice} Voltz/Kw
-                  </p>
-                  <p className="pt-6 text-xl font-semibold">
-                    Amount of Kw you are buying: {value} Kws
-                  </p>
-                  <p className="pt-6 text-xl font-semibold">
-                    Total to be paid:{" "}
-                    {value * (selectedStation?.meanPrice ?? 0)} Voltz
-                  </p>
-                </DialogDescription>
-                <button
-                  onClick={() => {
-                    placeBid();
-                    setOpenPopUp(false);
-                  }}
-                  className="bg-primary text-black font-semibold px-4 py-2 rounded-lg"
-                >
-                  Place Bid
-                </button>
-                <button
-                  onClick={() => setOpenPopUp(false)}
-                  className="bg-[#444] text-white px-4 py-2 rounded-lg"
-                >
-                  Go back
-                </button>
-              </DialogContent>
-            </Dialog>
     </LocationProvider>
   );
 };
