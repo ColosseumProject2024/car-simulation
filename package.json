@@ -7,25 +7,30 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "echo&&echo&& npx only-allow pnpm"
   },
-  
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-progress": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
+    "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.24",
+    "leaflet": "^1.9.4",
+    "leaflet-defaulticon-compatibility": "^0.1.2",
     "lucide-react": "^0.364.0",
     "next": "14.1.4",
     "only-allow": "^1.2.1",
+    "rc-slider": "^10.5.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-leaflet": "^4.2.1",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7"
   },
-
   "devDependencies": {
+    "@types/leaflet": "^1.9.9",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

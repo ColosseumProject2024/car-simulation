@@ -27,7 +27,7 @@ export default function CarMock({
 
 
   return (
-<div className="absolute flex items-center justify-center overflow-hidden h-screen">
+<div className="absolute flex items-center justify-center -z-10 overflow-hidden h-screen">
   <motion.div
   ref={scope}
         initial={{ opacity: 1 }}

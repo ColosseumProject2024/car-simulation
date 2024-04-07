@@ -36,7 +36,7 @@ export default function MultimediaMock({
           border: "solid 2px #5f5f5f",
           borderRadius: "20px",
         }}
-        className="max-w-screen-xl h-3/4 w-11/12 aspect-video bg-neutral-800"
+        className="max-w-screen-xl h-3/4 w-11/12 aspect-video bg-black"
       >
         <div
           className="h-full w-full"
