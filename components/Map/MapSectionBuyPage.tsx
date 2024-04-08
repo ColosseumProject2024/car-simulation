@@ -2,29 +2,24 @@ import dynamic from "next/dynamic";
 import React, { useEffect, useMemo } from "react";
 import { useLocation } from "../../contexts/LocationContext";
 import queryAllStations from "../../utils/queryAllStations";
+import Station from "@/types/station";
 
 interface MapSectionBuypageProps {
   roundedTopCorners: boolean;
   roundedBottomCorners: boolean;
   stations: any;
-  setStations: any;
   width: string;
-  setSelectedStation: any;
+  setSelectedStation: (station: Station) => void;
 }
 
 export const MapSectionBuypage = ({
   roundedTopCorners,
   roundedBottomCorners,
   stations,
-  setStations,
   width,
   setSelectedStation,
 }: MapSectionBuypageProps) => {
   const { location } = useLocation();
-
-  useEffect(() => {
-    queryAllStations().then(setStations);
-  }, [setStations]);
 
   const Map = useMemo(
     () =>
@@ -49,7 +44,7 @@ export const MapSectionBuypage = ({
       center={location}
       width={width}
       setSelectedStation={setSelectedStation}
-      height="385px"
+      height="460px"
     />
   );
 };

@@ -29,7 +29,7 @@ const SidebarApp: React.FC<SidebarAppProps> = ({ setActivePage }) => {
   return (
     <aside className="bg-black text-white flex flex-col items-center py-4 justify-center">
       <div
-        className={`my-4 rounded-full p-2 h-16 w-16 flex justify-center items-center ${
+        className={`my-4 rounded-full p-2 h-16 w-16 flex justify-center transition items-center ${
           activeIcon === 0 ? "bg-[#3AFF4E]" : "bg-[#1d1d1d]"
         }`}
         onClick={() => handleIconClick(0)}

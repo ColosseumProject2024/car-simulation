@@ -4,7 +4,7 @@ import L from "leaflet";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, MapContainerProps, Marker, Popup, TileLayer, Tooltip, useMap } from "react-leaflet";
+import {AttributionControl,  MapContainer, MapContainerProps, Marker, Popup, TileLayer, Tooltip, useMap } from "react-leaflet";
 import { Progress } from "@/components/ui/progress";
 import Station from "@/types/station";
 import makePercentage from "@/utils/makePercentage";
@@ -98,14 +98,14 @@ const Map = ({
         }
         `}
       </style>
-      <MapContainer center={center} zoom={1} scrollWheelZoom={true} style={containerStyle}>
+      <MapContainer center={center} zoom={1} attributionControl={false}  scrollWheelZoom={true} style={containerStyle}>
+        <AttributionControl prefix={false} position="bottomright"/>
         <MapUpdater mapCenter={center} />
 
         <TileLayer
           // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
           accessToken="3649afdf-ff6e-40b4-8d98-ef0deb099145"
-          
 
         />
         <Marker icon={iAmHereIcon} position={userLocation}>

@@ -7,6 +7,7 @@ import SimulationDialog from "@/components/SimulationDialog/SimulationDialog";
 import logo from "@/public/logo_horizontal.svg";
 import Image from "next/image";
 import Simulation from "@/components/Simulation/Simulation";
+import { Car } from "lucide-react";
 export default function Home() {
   const [simulationState, setSimulationState] = useState(1);
   /*

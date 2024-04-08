@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google"
 import icon from "./favicon.ico"
 import "./globals.css";
-
-
 export const metadata: Metadata = {
   title: "DeVolt simulation",
   description: "Test our car screen simulation!",
