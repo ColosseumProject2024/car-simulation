@@ -13,21 +13,11 @@ import { Button } from "../ui/button";
 
 interface ConfirmChargeProps {
     selectedStation: Station | null;
-    selectedSpot: {
-        id: number;
-        name: string;
-        compatibility: string;
-        status: string;
-    };
-    toBeCharged: number;
-    chargeCost: number;
+
 }
 
 const Step4 = ({
     selectedStation,
-    selectedSpot,
-    toBeCharged,
-    chargeCost,
 }: ConfirmChargeProps) => {
 
     const [openEndDialog, setOpenEndDialog] = React.useState(false);
@@ -56,12 +46,12 @@ const Step4 = ({
                         <p className="text-xl font-semibold">
                             Station: {selectedStation?.address || "Rua Piracicaba"}
                         </p>
-                        <p className="text-xl">Spot: {selectedSpot?.name || "Rua piraciba"}</p>
+                        <p className="text-xl">Spot: { "Rua piraciba"}</p>
                         <p className="text-xl">
-                            To be Charged: {toBeCharged || "2500"} kW
+                            To be Charged: { "2500"} kW
                         </p>
                         <p className="text-xl font-semibold">
-                            Total Cost: ${chargeCost || "1440"} VOLTS
+                            Total Cost: ${"1440"} VOLTS
                         </p>
                     </div>
                 </div>
