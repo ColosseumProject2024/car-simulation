@@ -26,9 +26,9 @@ export default function Home() {
 
   return (
     <main className="overflow-hidden">
-      <div className="absolute top-4 z-20 mx-auto w-screen flex justify-center text-xl">
+      {/* <div className="absolute top-4 z-20 mx-auto w-screen flex justify-center text-xl">
         <Image src={logo} alt="logo" width={150} />
-      </div>
+      </div> */}
       <SimulationDialog
         simulationState={simulationState}
         setSimulationState={setSimulationState}

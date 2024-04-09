@@ -10,6 +10,7 @@
     "preinstall": "echo&&echo&& npx only-allow pnpm"
   },
   "dependencies": {
+    "@coral-xyz/anchor": "^0.29.0",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-progress": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
@@ -19,6 +20,7 @@
     "@solana/wallet-adapter-wallets": "^0.19.32",
     "@solana/web3.js": "^1.91.4",
     "axios": "^1.6.8",
+    "bs58": "^5.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.24",

@@ -51,10 +51,7 @@ const Buy = () => {
         />
         )}
       {currentStep == 3 && <Step3 setCurrentStep={setCurrentStep} />}
-      {currentStep == 4 && <Step4
-      selectedStation={selectedStation}
-      
-      />}
+      {currentStep == 4 && <Step4 selectedStation={selectedStation} />}
       </AnimatePresence>
     </>
   );
