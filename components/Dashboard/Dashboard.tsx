@@ -58,7 +58,6 @@ const Dashboard = () => {
               <h1 className="text-lg  font-medium">Avenida rebouças, 3004</h1>
               <h1 className="text-lg">Price 0,88/kWh</h1>
             </div>
-            <div>3</div>
           </div>
         </div>
         <div className="m-3  bg-zinc-800 rounded-[25px]">
@@ -76,10 +75,8 @@ const Dashboard = () => {
               </h1>
             </div>
             <div>
-              <h1 className="text-lg  font-medium">Avenida rebouças, 3004</h1>
-              <h1 className="text-lg">Price 0,88/kWh</h1>
+              <h1 className="text-3xl  font-medium">VOLT$ 0,90 /kWh</h1>
             </div>
-            <div>3</div>
           </div>
         </div>
       </div>
