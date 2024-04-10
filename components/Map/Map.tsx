@@ -4,10 +4,20 @@ import L from "leaflet";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
-import {AttributionControl,  MapContainer, MapContainerProps, Marker, Popup, TileLayer, Tooltip, useMap } from "react-leaflet";
+import {
+  AttributionControl,
+  MapContainer,
+  MapContainerProps,
+  Marker,
+  Popup,
+  TileLayer,
+  Tooltip,
+  useMap,
+} from "react-leaflet";
 import { Progress } from "@/components/ui/progress";
 import Station from "@/types/station";
 import makePercentage from "@/utils/makePercentage";
+import { CheckCircle } from "lucide-react";
 
 const iAmHereIcon = L.icon({
   iconUrl: "/mapIcon.svg",
@@ -33,7 +43,7 @@ const MapUpdater = ({ mapCenter }: any) => {
   useEffect(() => {
     map.flyTo(mapCenter, 16, {
       animate: true,
-      duration: 5.0, // Duração da animação em segundos
+      duration: 2.0, // Duração da animação em segundos
     });
   }, [mapCenter, map]);
 
@@ -65,7 +75,9 @@ const Map = ({
   setSelectedStation,
   hidden,
 }: mapProps) => {
-  const [containerStyle, setContainerStyle] = useState<MapContainerProps["style"]>({
+  const [containerStyle, setContainerStyle] = useState<
+    MapContainerProps["style"]
+  >({
     width: width || "100%",
     height: height || "550px",
     borderTopLeftRadius: roundedTopCorners ? "12px" : "0",
@@ -95,21 +107,36 @@ const Map = ({
           background-color: #222;
           border-radius: 10px;
           text-color: white;
+          margin: 0;
         }
+        .leaflet-popup-content p {
+          margin: 10px 0;
+          font-family: __Poppins_35a7f6, sans-serif;
+      }
         `}
       </style>
-      <MapContainer center={center} zoom={1} attributionControl={false}  scrollWheelZoom={true} style={containerStyle}>
-        <AttributionControl prefix={false} position="bottomright"/>
+      <MapContainer
+        center={center}
+        zoom={13}
+        attributionControl={false}
+        scrollWheelZoom={true}
+        style={containerStyle}
+      >
+        <AttributionControl prefix={false} position="bottomright" />
         <MapUpdater mapCenter={center} />
 
         <TileLayer
           // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
           accessToken="3649afdf-ff6e-40b4-8d98-ef0deb099145"
-
         />
         <Marker icon={iAmHereIcon} position={userLocation}>
-          <Popup>Você está aqui!</Popup>
+          <Popup>
+            <p className="text-neutral-300 font-semibold">
+
+            you are here!
+            </p>
+            </Popup>
         </Marker>
 
         {/* map the stations prop */}
@@ -117,28 +144,30 @@ const Map = ({
         {stations.map((station: Station, index: number) => {
           console.log(station.longitude);
           return (
-            <Marker key={station.id} position={[station.latitude, station.longitude]} icon={stationIcon}>
+            <Marker
+              key={station.id}
+              position={[station.latitude, station.longitude]}
+              icon={stationIcon}
+            >
               <Popup>
                 <div className="leading-[1px] text-white">
-                  <p className="pb-4">{station.address || "Unnamed station"} </p>
-                  <p>{station.address}</p>
-                  <a href={`https://www.google.com/maps/search/${station.latitude},+${station.longitude}?entry=tts`}>
-                    Ver no Google Maps
-                  </a>
-                  <p className="font-bold ">Carga disponível:</p>
-                  <Progress
-                    className="bg-slate-300"
-                    value={parseInt(makePercentage(station.batteryLevel, station.maxCapacity).toFixed(0)) || 50}
-                  ></Progress>
-                  <p className="">
-                    {makePercentage(station.batteryLevel, station.maxCapacity).toFixed(0) || 50}% (12 A/h)
+                  <p className="text-center my-10 max-w-screen-md text-base">
+                    {station.address || "Unnamed station"}{" "}
                   </p>
+                  <div className="flex my-0 py-0 gap-2 justify-center items-center">
+                    <CheckCircle
+                      size={20}
+                      color="#86ffb8"
+                      className=""
+                    />
+                    <p className="font-bold text-base text-green-300">
+                      Compatible
+                    </p>
+                  </div>
+            <div className="bg-neutral-800 rounded-lg max-w-max mx-auto mb-2 shadow px-4 flex">
 
-                  <p className="font-bold pt-4">Compatibility:</p>
-                  <p className=""> BYD, EC20 and Volvo Plugs</p>
-
-                  <p className="font-bold pt-4">Price per Kw:</p>
-                  <p className="">{station.meanPrice} Voltz</p>
+                  <p className="text-lg font-medium text-center w-full">{station.meanPrice} Volts/Kwh</p>
+            </div>
 
                   {buttonText && (
                     <button
@@ -147,7 +176,7 @@ const Map = ({
                           setSelectedStation(station);
                         }
                       }}
-                      className="bg-primary p-4 px-6 rounded-full text-[#1e1e1e] font-bold hover:bg-green-400 transition"
+                      className="bg-[#3aff4e] text-base w-full mt-4 py-1 rounded-lg text-[#1e1e1e] font-bold hover:bg-green-400 transition"
                     >
                       {buttonText}
                     </button>

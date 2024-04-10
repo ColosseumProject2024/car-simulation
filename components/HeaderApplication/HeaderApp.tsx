@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import weather from "@/public/cloud-sun.svg";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { Wallet } from "lucide-react";
 
 const HeaderApp = () => {
     return (
@@ -21,9 +22,12 @@ const HeaderApp = () => {
             </div>
             <div className="pr-4">
                 <WalletMultiButton style={{
-                    backgroundColor: "rgb(58 255 78 / var(--tw-bg-opacity))",
-                    color: "black"
-                }} />
+                    backgroundColor: "rgb(58 255 78)",
+                    color: "black",
+                    borderRadius: "10px",
+                }} 
+                endIcon={<Wallet size={20}/>}
+                />
             </div>
         </header>
     );

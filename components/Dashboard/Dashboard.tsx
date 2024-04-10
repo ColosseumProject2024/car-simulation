@@ -22,7 +22,7 @@ const Dashboard = () => {
           center={[-23.572448, -46.706937]}
           stations={[
             {
-              address: "Rua dos Pinheiros, 220",
+              address: "Rua dos Pinheiros, jardim angela dos piraguaios, 220",
               batteryLevel: 50,
               id: 1,
               latitude: -23.572448,
