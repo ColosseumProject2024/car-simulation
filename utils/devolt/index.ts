@@ -26,7 +26,7 @@ export const convertSecretKeyToKeypair = (key: string) => {
     return Keypair.fromSecretKey(secretKey);
 };
 
-class DevoltClient {
+export class DevoltClient {
     connection: Connection;
     wallet: Wallet;
     provider: AnchorProvider;
@@ -34,7 +34,7 @@ class DevoltClient {
 
     constructor(connection: Connection, wallet: Wallet) {
         this.connection = connection;
-        this.wallet = wallet;
+        this.wallet = new Wallet(new Keypair(wallet.secretKey));
         this.provider = new AnchorProvider(
             this.connection,
             this.wallet,

@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import energy from "./assets/energy.svg";
 import chargingstation from "./assets/chargingstation.svg";
+import MapComponentDashboard from "./MapComponentDashboard";
 
 const Dashboard = () => {
   const Map = useMemo(
@@ -18,26 +19,7 @@ const Dashboard = () => {
   return (
     <div className="grid grid-cols-2">
       <div className="p-3">
-        <Map
-          center={[-23.572448, -46.706937]}
-          stations={[
-            {
-              address: "Rua dos Pinheiros, jardim angela dos piraguaios, 220",
-              batteryLevel: 50,
-              id: 1,
-              latitude: -23.572448,
-              longitude: -46.06937,
-              maxCapacity: 100,
-              meanPrice: 2.5,
-              availablePlugs: "asdgadf",
-              maxVoltage: 220,
-            },
-          ]}
-          height="520px"
-          roundedBottomCorners
-          roundedTopCorners
-          userLocation={[-23.572448, -46.706937]}
-        />
+        <MapComponentDashboard/>
       </div>
       <div className="grid grid-rows-2">
         <div className="m-3 bg-zinc-800 rounded-[25px]">
