@@ -28,35 +28,53 @@ const SidebarApp: React.FC<SidebarAppProps> = ({ setActivePage }) => {
 
   return (
     <aside className="bg-black text-white flex flex-col items-center py-4 justify-center">
-      <div
-        className={`my-4 rounded-full p-2 h-16 w-16 flex justify-center transition items-center ${
-          activeIcon === 0 ? "bg-[#3AFF4E]" : "bg-[#1d1d1d]"
-        }`}
-        onClick={() => handleIconClick(0)}
-      >
-        <Image
-          src={dash}
-          alt="Dashboard icon"
-          width={32}
-          height={32}
-          style={{ filter: activeIcon === 0 ? "invert(1)" : "invert(0)" }}
-        />
+      <div className="text-center">
+        <div
+          className={`mb-2  cursor-pointer rounded-full p-2 h-16 w-16 flex justify-center transition items-center ${
+            activeIcon === 0 ? "bg-[#3AFF4E]" : "bg-[#1d1d1d]"
+          }`}
+          onClick={() => handleIconClick(0)}
+        >
+          <Image
+            src={dash}
+            alt="Dashboard icon"
+            width={32}
+            height={32}
+            style={{ filter: activeIcon === 0 ? "invert(1)" : "invert(0)" }}
+          />
+        </div>{" "}
+        <p
+          className={`transition mb-2 ${
+            activeIcon === 0 ? "text-white font-medium" : "text-neutral-500"
+          }`}
+        >
+          Home
+        </p>
       </div>
-      <div
-        className={`my-4 rounded-full p-2 h-16 w-16 flex justify-center items-center ${
-          activeIcon === 2 ? "bg-[#3AFF4E]" : "bg-[#1d1d1d]"
-        }`}
-        onClick={() => handleIconClick(2)}
-      >
-        <Image
-          src={bag}
-          alt="Pagina Tres icon"
-          width={32}
-          height={32}
-          style={{ filter: activeIcon === 2 ? "invert(1)" : "invert(0)" }}
-        />
+
+      <div className="text-center">
+        <div
+          className={`mt-4  cursor-pointer mb-2 rounded-full p-2 h-16 w-16 flex justify-center items-center ${
+            activeIcon === 2 ? "bg-[#3AFF4E]" : "bg-[#1d1d1d]"
+          }`}
+          onClick={() => handleIconClick(2)}
+        >
+          <Image
+            src={bag}
+            alt="Pagina Tres icon"
+            width={32}
+            height={32}
+            style={{ filter: activeIcon === 2 ? "invert(1)" : "invert(0)" }}
+          />
+        </div>
+        <p
+          className={`transition ${
+            activeIcon === 2 ? "text-white font-medium" : "text-neutral-500"
+          }`}
+        >
+          Buy
+        </p>
       </div>
-      
     </aside>
   );
 };

@@ -1,22 +1,10 @@
 import React, { useCallback, useState } from "react";
-import Image from "next/image";
-import arrow from "./assets/arrow.svg";
-import arrowReverse from "./assets/arrowreverse.svg";
-import Station from "@/types/station";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogTitle,
-} from "../ui/dialog";
 import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
 import { WalletContext, useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { Keypair, SystemProgram, Transaction } from '@solana/web3.js';
 import { MapPin } from "lucide-react";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
-import { DEVOLT_PROGRAM_ID, getStationAddressSync } from "@/utils/devolt";
-import { web3 } from "@coral-xyz/anchor";
 interface SelectPlugProps {
     setCurrentStep: (step: number) => void;
 }

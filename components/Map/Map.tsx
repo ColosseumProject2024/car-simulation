@@ -1,5 +1,5 @@
 // src/components/Map.tsx
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import L from "leaflet";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
@@ -18,6 +18,11 @@ import { Progress } from "@/components/ui/progress";
 import Station from "@/types/station";
 import makePercentage from "@/utils/makePercentage";
 import { CheckCircle } from "lucide-react";
+import { Program } from "@coral-xyz/anchor";
+import { Devolt, IDL } from "@/utils/devolt/types";
+import { useConnection } from "@solana/wallet-adapter-react";
+import { toast } from "react-toastify";
+import { useStations } from "@/contexts/StationsContext";
 
 const iAmHereIcon = L.icon({
   iconUrl: "/mapIcon.svg",
@@ -51,7 +56,6 @@ const MapUpdater = ({ mapCenter }: any) => {
 };
 
 interface mapProps {
-  stations: Station[];
   width?: string;
   height?: string;
   center: any;
@@ -64,7 +68,6 @@ interface mapProps {
 }
 
 const Map = ({
-  stations,
   width,
   height,
   center,
@@ -75,6 +78,7 @@ const Map = ({
   setSelectedStation,
   hidden,
 }: mapProps) => {
+  const { stations, loading } = useStations();
   const [containerStyle, setContainerStyle] = useState<
     MapContainerProps["style"]
   >({
@@ -132,17 +136,13 @@ const Map = ({
         />
         <Marker icon={iAmHereIcon} position={userLocation}>
           <Popup>
-            <p className="text-neutral-300 font-semibold">
-
-            you are here!
-            </p>
-            </Popup>
+            <p className="text-neutral-300 font-semibold">you are here!</p>
+          </Popup>
         </Marker>
 
         {/* map the stations prop */}
 
         {stations.map((station: Station, index: number) => {
-          console.log(station.longitude);
           return (
             <Marker
               key={station.id}
@@ -155,19 +155,16 @@ const Map = ({
                     {station.address || "Unnamed station"}{" "}
                   </p>
                   <div className="flex my-0 py-0 gap-2 justify-center items-center">
-                    <CheckCircle
-                      size={20}
-                      color="#86ffb8"
-                      className=""
-                    />
+                    <CheckCircle size={20} color="#86ffb8" className="" />
                     <p className="font-bold text-base text-green-300">
                       Compatible
                     </p>
                   </div>
-            <div className="bg-neutral-800 rounded-lg max-w-max mx-auto mb-2 shadow px-4 flex">
-
-                  <p className="text-lg font-medium text-center w-full">{station.meanPrice} Volts/Kwh</p>
-            </div>
+                  <div className="bg-neutral-800 rounded-lg max-w-max mx-auto mb-2 shadow px-4 flex">
+                    <p className="text-lg font-medium text-center w-full">
+                      {station.meanPrice} Volts/Kwh
+                    </p>
+                  </div>
 
                   {buttonText && (
                     <button

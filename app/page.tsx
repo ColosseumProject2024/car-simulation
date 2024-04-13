@@ -1,5 +1,5 @@
 "use client";
-
+import "react-toastify/dist/ReactToastify.css";
 import CarMock from "@/components/CarMock/CarMock";
 import MultimediaMock from "@/components/MultimediaMock/MultimediaMock";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import logo from "@/public/logo_horizontal.svg";
 import Image from "next/image";
 import Simulation from "@/components/Simulation/Simulation";
 import { Car } from "lucide-react";
+import { ToastContainer } from "react-toastify";
 export default function Home() {
   const [simulationState, setSimulationState] = useState(1);
   /*
@@ -26,6 +27,8 @@ export default function Home() {
 
   return (
     <main className="overflow-hidden">
+      <ToastContainer position="bottom-center" theme="dark" bodyClassName={"font-semibold"}/>
+
       {/* <div className="absolute top-4 z-20 mx-auto w-screen flex justify-center text-xl">
         <Image src={logo} alt="logo" width={150} />
       </div> */}

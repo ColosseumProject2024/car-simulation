@@ -40,7 +40,6 @@ export const MapSectionBuypage = ({
       userLocation={location}
       roundedTopCorners={roundedTopCorners}
       roundedBottomCorners={roundedBottomCorners}
-      stations={stations}
       center={location}
       width={width}
       setSelectedStation={setSelectedStation}

@@ -6,6 +6,7 @@ import Buy from "@/components/Buy/Buy";
 import Dashboard from "@/components/Dashboard/Dashboard";
 import { SolanaProvider } from "../Wallet/Wallet";
 import { AnimatePresence } from "framer-motion";
+import { StationsProvider } from "@/contexts/StationsContext";
 
 export default function Simulation() {
   const [activePage, setActivePage] = useState("dashboard");
@@ -23,7 +24,8 @@ export default function Simulation() {
 
   return (
     <LocationProvider>
-      <SolanaProvider>
+        <SolanaProvider>
+      <StationsProvider>
           <HeaderApp />
           <div className="grid h-[88%] grid-cols-12 h-">
             <SidebarApp setActivePage={setActivePage} />
@@ -31,7 +33,8 @@ export default function Simulation() {
               <main className="p-4 h-full">{getPageComponent()}</main>
             </div>
           </div>
-      </SolanaProvider>
+      </StationsProvider>
+        </SolanaProvider>
     </LocationProvider>
   );
 }

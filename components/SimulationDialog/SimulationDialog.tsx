@@ -4,6 +4,7 @@ import {
     Dialog,
     DialogContent,
     DialogTitle,
+    DialogClose,
     DialogHeader,
     DialogFooter,
 } from "@/components/ui/dialog";
@@ -18,13 +19,26 @@ export default function SimulationDialog({
     setSimulationState: React.Dispatch<React.SetStateAction<number>>;
 }) {
     return (
-        <Dialog open={simulationState == 1 ? true : false}>
+        <Dialog open={simulationState == 1 ? true : false} >
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Simulation ahead!</DialogTitle>
+                    <DialogTitle className="text-xl">Simulation ahead!</DialogTitle>
                 </DialogHeader>
-                This page simulates what you can do with your car when you want to charge it. You can see the charging station, the spot, the amount of energy to be charged and the total cost.
-                <DialogFooter>
+                    
+                <p>
+
+                This page simulates what you can do when running the DeVolt app on CarPlay/Android Auto.
+                </p>
+                <p className="text-lg font-semibold">
+                    Payment
+                </p>
+                <p>
+                    For the sake of this simulation, you can pay for your charge using a browser wallet e.g. Phantom, Brave. 
+                </p>
+                                <p>
+                                    You can restart anytime by refreshing this page.
+                </p>
+                <DialogFooter className="mt-4">
                     <Button onClick={() => setSimulationState(2)}>Got it!</Button>
                 </DialogFooter>
             </DialogContent>
