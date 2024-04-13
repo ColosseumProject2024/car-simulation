@@ -5,23 +5,18 @@ import Image from "next/image";
 import energy from "./assets/energy.svg";
 import chargingstation from "./assets/chargingstation.svg";
 import MapComponentDashboard from "./MapComponentDashboard";
+import { useStations } from "@/contexts/StationsContext";
 
 const Dashboard = () => {
-  const Map = useMemo(
-    () =>
-      dynamic(() => import("@/components/Map/Map"), {
-        loading: () => <p>map is loading</p>,
-        ssr: false,
-      }),
-    []
-  );
+
+  const {averagePrice} = useStations()
 
   return (
-    <div className="grid grid-cols-2">
-      <div className="p-3">
+    <div className="grid grid-cols-3">
+      <div className="p-3 col-span-2">
         <MapComponentDashboard/>
       </div>
-      <div className="grid grid-rows-2">
+      <div className="grid grid-rows-2 h-[545px]">
         <div className="m-3 bg-zinc-800 rounded-[25px]">
           <div className="m-6 grid grid-cols-1 grid-rows-3 gap-4">
             <div className="flex items-center">
@@ -36,14 +31,14 @@ const Dashboard = () => {
                 Nearest Charging Point
               </h1>
             </div>
-            <div>
+            <div className="text-center mt-4">
               <h1 className="text-lg  font-medium">Avenida rebouças, 3004</h1>
-              <h1 className="text-lg">Price 0,88/kWh</h1>
+              <h1 className="text-lg">$15.88/kWh</h1>
             </div>
           </div>
         </div>
         <div className="m-3  bg-zinc-800 rounded-[25px]">
-          <div className="m-6 grid grid-cols-1 grid-rows-3 gap-4">
+          <div className="m-6 h-48 grid grid-cols-1 grid-rows-3 gap-4">
             <div className="flex items-center">
               <Image
                 src={chargingstation}
@@ -56,8 +51,9 @@ const Dashboard = () => {
                 Average energy price
               </h1>
             </div>
-            <div>
-              <h1 className="text-3xl  font-medium">VOLT$ 0,90 /kWh</h1>
+            <div className="text-center">
+              <p className="text-2xl mt-8  font-semibold">${averagePrice?.toFixed(2)}/kWh</p>
+              <p className="text-xl  font-medium">VOLTs</p>
             </div>
           </div>
         </div>

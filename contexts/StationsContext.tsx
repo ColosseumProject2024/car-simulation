@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 interface ContextType {
   stations: Station[];
   loading: boolean;
+  averagePrice?: number;
 }
 
 // Criando o contexto
@@ -25,6 +26,7 @@ export const StationsProvider = ({
 }) => {
   const [stations, setStations] = useState<Station[]>([]);
   const [loading, setLoading] = useState(true);
+  const [averagePrice, setAveragePrice] = useState<number>(0);
   const solanaConnection = useConnection();
 
   useEffect(() => {
@@ -37,7 +39,13 @@ export const StationsProvider = ({
         solanaConnection
       );
       const data = await program.account.station.all();
+
+      let averageEnergyPrice = 0;
+
       const arr: Station[] = data.map((i) => {
+        const price = 15 + Number((Math.random() * 3).toFixed(2));
+        averageEnergyPrice += price;
+
         return {
           address: "Unknown address :(",
           id: i.account.id,
@@ -45,16 +53,15 @@ export const StationsProvider = ({
           longitude: i.account.longitude,
           batteryLevel: i.account.batteryLevel,
           maxCapacity: i.account.maxCapacity,
-          meanPrice: 15 + Number((Math.random() * 3).toFixed(2)),
+          meanPrice: price,
           availablePlugs: "BYD",
           maxVoltage: 220,
         };
       });
 
       for (const [i, station] of arr.entries()) {
-
         toast.update("fetchToast", {
-            render: `Fetching Stations (${i}/${arr.length})`,
+          render: `Fetching Stations (${i}/${arr.length})`,
         });
 
         await axios
@@ -62,37 +69,40 @@ export const StationsProvider = ({
             `https://maps.googleapis.com/maps/api/geocode/json?latlng=${station.latitude},${station.longitude}&key=AIzaSyCqZt14hGPmKuo4KsNja7Ciz3eebmEL_G8`
           )
           .then((response) => {
-
             if (response.data.status === "ZERO_RESULTS") {
-                station.address = "Unknown address :(";
+              station.address = "Unknown address :(";
             }
 
             const address = response.data.results[0].address_components;
 
-            station.address = `${address[1].short_name} ${address[0].short_name}, ${address[2].short_name} - ${address[3].short_name}`
+            station.address = `${address[1].short_name} ${address[0].short_name}, ${address[2].short_name} - ${address[3].short_name}`;
           })
           .catch((error) => {
             station.address = "Error loading this address :(";
-          })
+          });
       }
 
-      return arr;
+      return {
+        arr,
+        averagePrice: averageEnergyPrice / arr.length,
+      };
     };
 
-    fetchStations().then((arr) => {
+    fetchStations().then((data) => {
       toast.update("fetchToast", {
         render: "All stations fetched!",
         type: "success",
         isLoading: false,
         autoClose: 5000,
       });
-      setStations(arr);
+      setStations(data.arr);
       setLoading(false);
+      setAveragePrice(data.averagePrice);
     });
   }, []);
 
   return (
-    <StationsContext.Provider value={{ stations, loading }}>
+    <StationsContext.Provider value={{ stations, loading, averagePrice }}>
       {children}
     </StationsContext.Provider>
   );
