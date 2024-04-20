@@ -19,8 +19,6 @@ export const MapSectionBuypage = ({
   width,
   setSelectedStation,
 }: MapSectionBuypageProps) => {
-  const { location } = useLocation();
-
   const Map = useMemo(
     () =>
       dynamic(() => import("./Map"), {
@@ -30,17 +28,14 @@ export const MapSectionBuypage = ({
     []
   );
 
-  if (!location || location.some(coord => coord === null)) {
-    return <p>Location data is not available.</p>;
-  }
 
   return (
     <Map
       buttonText="Select"
-      userLocation={location}
+      userLocation={[-23.572448, -46.706937]}
       roundedTopCorners={roundedTopCorners}
       roundedBottomCorners={roundedBottomCorners}
-      center={location}
+      center={[-23.572448, -46.706937]}
       width={width}
       setSelectedStation={setSelectedStation}
       height="460px"

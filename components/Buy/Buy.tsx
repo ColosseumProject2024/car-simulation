@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Step2 } from "./Step2";
 import Station from "../../types/station";
 import Step1 from "./Step1";
@@ -37,6 +37,11 @@ const Buy = () => {
   const [selectedEnergyAmount, setSelectedEnergyAmount] = useState(0);
   const [chargeCost, setChargeCost] = useState(0);
   const [currentStep, setCurrentStep] = useState(1);
+  const [intialBatteryLevel, setInitialBatteryLevel] = useState(50);
+
+  useEffect(()=>{
+    setInitialBatteryLevel(Math.floor(Math.random() * 30)+5)
+  }, [])
 
   return (
     <>
@@ -44,14 +49,14 @@ const Buy = () => {
       {currentStep == 1 && <Step1 setCurrentStep={setCurrentStep} stations={stations} setSelectedStation={setSelectedStation}/>}
       {currentStep == 2 && (
         <Step2
-        initialBatteryLevel={50}
+        initialBatteryLevel={intialBatteryLevel}
         selectedStation={selectedStation}
-        setChargeCost={setSelectedEnergyAmount}
+        setChargeCost={setChargeCost}
         setCurrentStep={setCurrentStep}
         />
         )}
-      {currentStep == 3 && <Step3 setCurrentStep={setCurrentStep} />}
-      {currentStep == 4 && <Step4 selectedStation={selectedStation} />}
+      {currentStep == 3 && <Step3 setCurrentStep={setCurrentStep} chargeCost={chargeCost} />}
+      {currentStep == 4 && <Step4 selectedStation={selectedStation} chargeCost={chargeCost} />}
       </AnimatePresence>
     </>
   );

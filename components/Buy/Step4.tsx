@@ -13,11 +13,11 @@ import { Button } from "../ui/button";
 
 interface ConfirmChargeProps {
     selectedStation: Station | null;
-
+    chargeCost: number;
 }
 
 const Step4 = ({
-    selectedStation,
+    selectedStation,chargeCost
 }: ConfirmChargeProps) => {
 
     const [openEndDialog, setOpenEndDialog] = React.useState(false);

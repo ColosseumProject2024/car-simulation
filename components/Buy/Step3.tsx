@@ -5,8 +5,10 @@ import { Keypair, SystemProgram, Transaction } from '@solana/web3.js';
 import { MapPin } from "lucide-react";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 interface SelectPlugProps {
     setCurrentStep: (step: number) => void;
+    chargeCost: number;
 }
 
 const spots = [
@@ -36,7 +38,7 @@ const spots = [
     },
 ];
 
-export default function Step3({ setCurrentStep }: SelectPlugProps) {
+export default function Step3({ setCurrentStep, chargeCost }: SelectPlugProps) {
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -44,7 +46,11 @@ export default function Step3({ setCurrentStep }: SelectPlugProps) {
     const { publicKey, sendTransaction } = useWallet();
 
     const onClick = useCallback(async () => {
-        if (!publicKey) throw new WalletNotConnectedError();
+        if (!publicKey) {
+            toast.error("Please, connect your wallet to proceed.");
+            setIsLoading(false);
+            return
+        }
 
         setIsLoading(true);
 
@@ -107,7 +113,7 @@ export default function Step3({ setCurrentStep }: SelectPlugProps) {
                     </div>
                     <div className="">
                         <p>You are paying</p>
-                        <p className="text-4xl py-2 font-semibold">1440 VOLTS</p>
+                        <p className="text-4xl py-2 font-semibold">{chargeCost} VOLTS</p>
                     </div>
                 </div>
             </div>
